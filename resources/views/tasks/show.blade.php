@@ -8,10 +8,10 @@
         <tr>
             <td>id</td>
             <td>ステータス</td>
-            <td>{{ $task->id }}</td>
+            <td>メッセージ</td>
         </tr>
         <tr>
-            <th>メッセージ</th>
+            <th>{{ $task->id }}</th>
             <td>{{ $task->status }}</td>
             <th>{{ $task->content }}</th>
         </tr>
