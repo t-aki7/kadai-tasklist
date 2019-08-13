@@ -45,11 +45,14 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $task = new Task;
-        
-        return view('tasks.create', [
-            'task' => $task,
-        ]);
+        if (\Auth::check()) {
+            $task = new Task;
+            
+            return view('tasks.create', [
+                'task' => $task,
+            ]);    
+        }
+        return view('welcome');
     }
 
     /**
@@ -95,11 +98,16 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task = Task::find($id);
-        
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+        if (\Auth::check()) {
+            $task = Task::find($id);
+            
+            if (\Auth::user()->id == $task->user_id) {
+                return view('tasks.show', [
+                    'task' => $task,
+                ]);      
+            }
+        }
+        return back();
     }
 
     /**
@@ -110,11 +118,16 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $task = task::find($id);
-        
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+        if (\Auth::check()) {
+            $task = task::find($id);
+            
+            if (\Auth::user()->id == $task->user_id) {
+                return view('tasks.edit', [
+                    'task' => $task,
+                ]);    
+            }
+        }
+        return back();
     }
 
     /**
