@@ -16,20 +16,11 @@ class TasksController extends Controller
     public function index()
     {
         $data = [];
-/*        
         if (\Auth::check()) {
+            //$tasks = Task::all();
             $user = \Auth::user();
-            $tasks = $user->tasklist()->orderBy('created_at', 'desc');
-            
-            $data = [
-                'user' => $user,
-                'tasks' => $tasks,
-            ];
-        }
-*/        
-        if (\Auth::check()) {
-            $tasks = Task::all();
-            //$tasks = Task::where('user_id', '\Auth::user()->name')->get();
+            $tasks = $user->tasks()->get();
+            //$microposts = $user->microposts()->orderBy('created_at', 'desc')->paginate(10);
             
             return view('tasks.index', [
                 'tasks' => $tasks,
@@ -82,7 +73,7 @@ class TasksController extends Controller
             'status' => 'required|max:10',
         ]);
         
-        $request->user()->tasklist()->create([
+        $request->user()->tasks()->create([
             'content' => $request->content,
             'status' => $request->status,
         ]);
