@@ -43,7 +43,7 @@ class TasksController extends Controller
                 'task' => $task,
             ]);    
         }
-        return view('welcome');
+        return redirect('/');
     }
 
     /**
@@ -91,14 +91,13 @@ class TasksController extends Controller
     {
         if (\Auth::check()) {
             $task = Task::find($id);
-            
             if (\Auth::user()->id == $task->user_id) {
                 return view('tasks.show', [
                     'task' => $task,
                 ]);      
-            }
+            } 
         }
-        return back();
+        return redirect('/');
     }
 
     /**
@@ -118,7 +117,7 @@ class TasksController extends Controller
                 ]);    
             }
         }
-        return back();
+        return redirect('/');
     }
 
     /**
