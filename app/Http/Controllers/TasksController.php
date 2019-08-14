@@ -78,7 +78,7 @@ class TasksController extends Controller
             'status' => $request->status,
         ]);
         
-        return back();
+        return redirect('/');
     }
 
     /**
